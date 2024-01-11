@@ -9,7 +9,7 @@ import {formReducer, INITIAL_STATE} from "./JournalForm.state.js";
 //     // data : true,
 //     text: true
 // }
-
+// console.log(13)
 export default function JournalForm({onSubmit}) {
 
     // const [formValidState, setFormValidState] = useState(INITIAL_STATE)
@@ -106,3 +106,4 @@ export default function JournalForm({onSubmit}) {
 
 }
 // `${styles['input']} ${formValidState.title ? '' : styles['invalid']} `
+
