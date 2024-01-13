@@ -29,7 +29,7 @@ export default function JournalForm({onSubmit}) {
                 type : 'CLEAR'
             })
         }
-    }, [isFormReadyToSubmit])
+    }, [isFormReadyToSubmit, values, onSubmit])
 
     const onChange = (e) => {
         dispatchForm({
