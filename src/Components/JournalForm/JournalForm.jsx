@@ -4,15 +4,6 @@ import {useEffect, useReducer } from "react";
 import cn from "classnames";
 import {formReducer, INITIAL_STATE} from "./JournalForm.state.js";
 
-// const INITIAL_STATE = {
-//     title: true,
-//     // data : true,
-//     text: true
-// }
-// console.log(13)
-
-
-
 export default function JournalForm({onSubmit}) {
 
     // const [formValidState, setFormValidState] = useState(INITIAL_STATE)
@@ -46,7 +37,7 @@ export default function JournalForm({onSubmit}) {
         const formData = new FormData(event.target)
         // console.log(formData)
         const formProps = Object.fromEntries(formData)
-        console.log(formProps)
+        // console.log(formProps)
 
         //раскоментировать для автоматической даты:
         // formProps.data = `${new Date().toLocaleTimeString('en-US', {hour12: false})} ${new Date().toLocaleDateString()}`
