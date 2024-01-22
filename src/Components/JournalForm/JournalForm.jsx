@@ -3,6 +3,7 @@ import Button from "../Button/Button.jsx";
 import {useEffect, useReducer, useRef} from "react";
 import cn from "classnames";
 import {formReducer, INITIAL_STATE} from "./JournalForm.state.js";
+import Input from "../Input/Input.jsx";
 
 export default function JournalForm({onSubmit}) {
 
@@ -65,9 +66,7 @@ export default function JournalForm({onSubmit}) {
         <form className={styles['journal-form']} onSubmit={addJournalItem}>
 
             <div>
-                <input type="text" ref={titleRef} onChange={onChange} value={values.title} name='title' className={cn(styles['input-title'], {
-                    [styles['invalid']]: !isValid.title,
-                })}/>
+                <Input type="text" ref={titleRef} isValid={isValid.title} onChange={onChange} value={values.title} name='title' appearence='title' />
             </div>
 
             <div className={styles['form-row']}>
@@ -81,7 +80,7 @@ export default function JournalForm({onSubmit}) {
 
                 </label>
                 
-                <input type="date" onChange={onChange} id={'data'} value={values.data} name='data' className={styles['input']}/>
+                <Input type="date" onChange={onChange} id={'data'} value={values.data} name='data' className={styles['input']}/>
 
             </div>
 
