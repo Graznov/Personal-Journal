@@ -1,6 +1,6 @@
 import styles from './JournalForm.module.css'
 import Button from "../Button/Button.jsx";
-import {useEffect, useReducer } from "react";
+import {useEffect, useReducer, useRef} from "react";
 import cn from "classnames";
 import {formReducer, INITIAL_STATE} from "./JournalForm.state.js";
 
@@ -9,9 +9,24 @@ export default function JournalForm({onSubmit}) {
     const [fotmState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
     const { isValid, isFormReadyToSubmit, values } = fotmState
 
+    const titleRef = useRef()
+    const textRef = useRef()
+
+    const focusError = (isValid) => {
+        switch (true){
+            case !isValid.title:
+                titleRef.current.focus()
+                break
+            case !isValid.text:
+                textRef.current.focus()
+                break
+        }
+    }
+
     useEffect(()=>{
         let timerId
         if(!isValid.title || !isValid.text || !isValid.date){
+            focusError(isValid)
             timerId = setTimeout(()=>{
                 console.log('Timer')
                 dispatchForm( { type : 'RESET_VALIDITY' } )
@@ -50,7 +65,7 @@ export default function JournalForm({onSubmit}) {
         <form className={styles['journal-form']} onSubmit={addJournalItem}>
 
             <div>
-                <input type="text" onChange={onChange} value={values.title} name='title' className={cn(styles['input-title'], {
+                <input type="text" ref={titleRef} onChange={onChange} value={values.title} name='title' className={cn(styles['input-title'], {
                     [styles['invalid']]: !isValid.title,
                 })}/>
             </div>
@@ -84,7 +99,7 @@ export default function JournalForm({onSubmit}) {
 
             </div>
 
-            <textarea name='text' onChange={onChange} value={values.text} cols='30' rows='10' className={cn(styles['input'], {
+            <textarea name='text' ref={textRef} onChange={onChange} value={values.text} cols='30' rows='10' className={cn(styles['input'], {
                 [styles['invalid']]: !isValid.text,
             })}></textarea>
             <Button text='Сохранить'/>
